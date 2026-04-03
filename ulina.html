@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Чертежи заводов Улина | Arknights: Endfield 1.1 — готовые схемы производства</title>
+    <meta name="description" content="Готовые чертежи для заводов в Улине: ксиранитовые, куприевые, ксирконовые производства. Схемы и коды для импорта (Европа/Азия). Пошаговое строительство АПК.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23f15a24' d='M32,2 C32,2 22,20 22,32 C22,44 28,52 32,62 C36,52 42,44 42,32 C42,20 32,2 32,2 Z'/%3E%3Cpath fill='%23ffcf40' d='M32,12 C32,12 26,24 26,32 C26,40 30,46 32,54 C34,46 38,40 38,32 C38,24 32,12 32,12 Z'/%3E%3Ccircle cx='32' cy='28' r='4' fill='%23ffffff'/%3E%3C/svg%3E">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #e6e9f0;
+            line-height: 1.5;
+            position: relative;
+            min-height: 100vh;
+        }
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+        :root {
+            --accent: #f15a24;
+            --card-bg: #1f1f24;
+            --border-dim: #2c2c33;
+            --text-secondary: #b0b3c0;
+        }
+        h1 {
+            font-size: 2.4rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            color: #f5f7fe;
+        }
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.25rem 0 0.75rem 0;
+            color: var(--accent);
+        }
+        .subhead {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid var(--border-dim);
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            backdrop-filter: blur(2px);
+        }
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(241, 90, 36, 0.15);
+        }
+        .img-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+        .img-card {
+            background: #111116;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-dim);
+            max-width: 100%;
+            flex: 1;
+            min-width: 250px;
+        }
+        .img-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .img-caption {
+            padding: 0.6rem;
+            font-size: 0.8rem;
+            text-align: center;
+            color: var(--text-secondary);
+            background: #0e0e12;
+        }
+        .code-block {
+            background: #0a0a0e;
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            border-left: 3px solid var(--accent);
+            margin: 0.8rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .code-text {
+            word-break: break-all;
+            color: #ffcf70;
+        }
+        .btn-copy {
+            background: none;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-copy:hover {
+            background: var(--accent);
+            color: #1a1a1a;
+        }
+        .region-tag {
+            display: inline-block;
+            background: rgba(241, 90, 36, 0.2);
+            border-radius: 40px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            margin-right: 0.5rem;
+        }
+        .warning-note {
+            background: rgba(224, 108, 108, 0.1);
+            border-left: 3px solid #e06c6c;
+            padding: 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+        }
+        .seller-button {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #ffd966;
+            border: 1px solid rgba(241, 90, 36, 0.5);
+            cursor: default;
+            user-select: none;
+        }
+        .seller-button::before {
+            content: "🛒";
+            margin-right: 8px;
+        }
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 0 1rem;
+            font-size: 0.8rem;
+            color: #5c5f72;
+            border-top: 1px solid var(--border-dim);
+            margin-top: 2rem;
+        }
+        @media (max-width: 760px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 1.8rem; }
+            .code-block { flex-direction: column; align-items: flex-start; }
+        }
+        hr { border: none; height: 1px; background: var(--border-dim); margin: 1rem 0; }
+    </style>
+</head>
+<body>
+<canvas id="particles-canvas"></canvas>
+<div class="container">
+    <div class="header-flex">
+        <div><h1>Чертежи заводов Улина<br><span style="font-size: 1rem; color: var(--text-secondary);">Arknights: Endfield 1.1 — готовые схемы производства</span></h1></div>
+        <div class="seller-button">Продавец: ShizzyBoost</div>
+    </div>
+    <div class="subhead">
+        Завод в Улине отличается использованием жидкостей. Чистая вода позволяет производить инновационный ксиранит. Готовые схемы для ксиранитовых, куприевых и ксирконовых изделий от пользователя skyJLV.
+    </div>
+
+    <!-- Введение -->
+    <div class="card">
+        <p>Завод в Улине отличается от привычных предприятий в Arknights: Endfield тем, что большинство производств на нём базируются на использовании жидкостей. С помощью чистой воды улинцы научились производить инновационный ксиранит, открывающий широкие возможности как в плане передачи энергии, так и в синтезе энергоёмких материалов.</p>
+        <p style="margin-top: 0.8rem;">В этом руководстве найдёте готовые схемы для полноценных предприятий, производящих ксиранитовые, куприевые и ксирконовые изделия. Все чертежи спроектированы пользователем <strong>skyJLV</strong>.</p>
+    </div>
+
+    <!-- Общие скриншоты -->
+    <div class="img-grid">
+        <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-1-800x450.jpeg" alt="Общий вид завода" loading="lazy" onerror="this.src='https://placehold.co/600x350/1f1f24/f15a24?text=Завод+Улина'"><div class="img-caption">Аванпост на равнине Небесного Царя</div></div>
+        <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-2-800x450.jpeg" alt="Термические банки" loading="lazy"><div class="img-caption">Термические банки и батареи ВЕ Долины</div></div>
+    </div>
+
+    <!-- Начальный этап -->
+    <h2>⚙️ Начальный этап прокачки</h2>
+    <div class="card">
+        <p>Прежде чем приступать к обустройству новой страны, пройдите до конца операцию 2 «Путь воды», после которой откроется аванпост на равнине Небесного Царя. На первое время поставьте пару термических банков и запитайте их батареями ВЕ Долины. Проведите электричество ко всем рудникам и установите там добывающие установки. Также не забудьте собрать индексы АПК со всех протокольных регистраторов, чтобы сразу разблокировать все технологии в плане АПК Улина.</p>
+        <div class="warning-note">⚠️ В водном регионе не так много залежей ферриевой руды — первое время её расход будет выше добычи. Это нормально, со временем придёт в норму.</div>
+    </div>
+
+    <!-- Первый комплекс (главная база) -->
+    <h3>🏭 Первая небесная кузница (главная база)</h3>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-3-800x450.jpeg" alt="Чертёж 1"><div class="img-caption">Комплекс на главной базе</div></div></div>
+        <p>Поставьте этот комплекс на главной базе в первую очередь. Первая небесная кузница будет производить ксиранитовые батареи и отправлять их в термический банк. Ещё четыре генератора будут сжигать ориджиний. Подключите подачу чистой воды вручную по трубе от канала на севере.</p>
+        <div class="code-block"><span class="code-text">EFO0136uI1o53Aauu0279</span><button class="btn-copy" data-code="EFO0136uI1o53Aauu0279">Копировать (Европа)</button></div>
+        <div class="code-block"><span class="code-text">EFO01iUIauoEe42ea7aU4</span><button class="btn-copy" data-code="EFO01iUIauoEe42ea7aU4">Копировать (Азия)</button></div>
+    </div>
+
+    <!-- Суб-ПБА на равнине -->
+    <h3>🌱 Суб-ПБА на равнине Небесного Царя</h3>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-4-800x450.jpeg" alt="Суб-ПБА"><div class="img-caption">Размещение вокруг суб-ПБА</div></div></div>
+        <p>Разместите вокруг суб-ПБА на равнине Небесного Царя и настройте выдачу ферриевой руды на всех портах выхода блока автоматизации. Трубы с водой необходимо подвести к обеим камерам реактора (на севере и на юге), а также к двум модулям посадки. В качестве растений для выращивания выберите <strong>ячжэнь</strong>.</p>
+        <div class="code-block"><span class="code-text">EFO01Eu24I5iE6oE3uIa</span><button class="btn-copy" data-code="EFO01Eu24I5iE6oE3uIa">Копировать (Европа)</button></div>
+        <div class="code-block"><span class="code-text">EFO018IeEi763a120UI73</span><button class="btn-copy" data-code="EFO018IeEi763a120UI73">Копировать (Азия)</button></div>
+    </div>
+
+    <!-- Вторая версия завода -->
+    <h3>🔋 Вторая версия завода (стабилизация энергии)</h3>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-5-800x450.jpeg" alt="Вторая версия"><div class="img-caption">Увеличенное производство ксиранита</div></div></div>
+        <p>Когда почувствуете, что выработка электричества стабилизировалась, вернитесь на главную базу и установите новый чертёж. Вторая версия завода производит больше ксиранита и сохраняет излишки батарей МЕ Улина для последующей перепродажи. Все сборщики семян можно заполнить песчанолистом.</p>
+        <div class="code-block"><span class="code-text">EFO011ea07931OU2i30O7</span><button class="btn-copy" data-code="EFO011ea07931OU2i30O7">Копировать (Европа)</button></div>
+        <div class="code-block"><span class="code-text">EFO012O9A06o43858eIOo</span><button class="btn-copy" data-code="EFO012O9A06o43858eIOo">Копировать (Азия)</button></div>
+    </div>
+
+    <!-- Ксиранитовый завод -->
+    <h2>💎 Ксиранитовый завод</h2>
+    <div class="card">
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-6-768x432.jpeg" alt="Ксиранит 1"><div class="img-caption">Первая половина завода</div></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-7-768x432.jpeg" alt="Ксиранит 2"><div class="img-caption">Вторая половина</div></div>
+        </div>
+        <p>Прежде чем приступать к крафту ксиранитовых компонентов для брони, приобретите у управляющего расширение области I и звено склада для обеих баз. Убедитесь, что открыто «Расширение кузницы I» в плане АПК.</p>
+        <div class="code-block"><span class="code-text">EFO014o5O8E74a375E71A</span><button class="btn-copy" data-code="EFO014o5O8E74a375E71A">Копировать (Европа)</button></div>
+        <div class="code-block"><span class="code-text">EFO0101O3u20U0iaE179</span><button class="btn-copy" data-code="EFO0101O3u20U0iaE179">Копировать (Азия)</button></div>
+        <p><strong>Вторая половина (южнее):</strong></p>
+        <div class="code-block"><span class="code-text">EFO01U4Ai5eaUIOE97Oa8</span><button class="btn-copy" data-code="EFO01U4Ai5eaUIOE97Oa8">Копировать (Европа)</button></div>
+        <div class="code-block"><span class="code-text">EFO013o724A363a40579</span><button class="btn-copy" data-code="EFO013o724A363a40579">Копировать (Азия)</button></div>
+        <p><strong>На равнине Небесного Царя (вокруг суб-ПБА):</strong></p>
+        <div class="code-block"><span class="code-text">EFO01Iao808OI79U5o08</span><button class="btn-copy" data-code="EFO01Iao808OI79U5o08">Копировать (Европа)</button></div>
+        <div class="code-block"><span class="code-text">EFO01a658421O8Aeoe5e</span><button class="btn-copy" data-code="EFO01a658421O8Aeoe5e">Копировать (Азия)</button></div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-12-768x432.jpeg" alt="Камера реактора"><div class="img-caption">Камера реактора с ксиранитом</div></div></div>
+    </div>
+
+    <!-- Куприевый завод -->
+    <h2>🔶 Куприевый завод для версии 1.1</h2>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-13-800x450.jpeg" alt="Куприевый завод"><div class="img-caption">Куприевая руда после открытия Циньбо</div></div></div>
+        <p>После открытия деревни Циньбо становится доступна куприевая руда. В первую очередь разблокируйте все новые производственные технологии: добыча гидрометодом, трубопроводы, модуль очистки воды, очистка жидкостью, расширение кузницы II.</p>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-14-768x432.jpeg" alt="Технологии 1"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-15-768x432.jpeg" alt="Технологии 2"></div>
+        </div>
+        <p><strong>Требования:</strong> 8 уровень развития региона, производство куприевой руды — 120/мин, ферриевой — 90/мин, все улучшения области АПК и звенья склада.</p>
+        <p><strong>Первая часть (основная база, 4 установки):</strong></p>
+        <div class="code-block"><span class="code-text">EFO01u1Ioa8Oui054AoOU</span><button class="btn-copy" data-code="EFO01u1Ioa8Oui054AoOU">Копировать (Европа)</button></div>
+        <div class="code-block"><span class="code-text">EFO01O4a7106aiIi94e4</span><button class="btn-copy" data-code="EFO01O4a7106aiIi94e4">Копировать (Азия)</button></div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-16-800x450.jpeg" alt="Первая часть"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-17-768x432.jpeg" alt="Гидронасосы"></div>
+        </div>
+        <p><strong>Вторая часть (юго-восточный угол):</strong></p>
+        <div class="code-block"><span class="code-text">EFO01893u6I48U1uAUI73</span><button class="btn-copy" data-code="EFO01893u6I48U1uAUI73">Копировать (Европа)</button></div>
+        <div class="code-block"><span class="code-text">EFO01O4a7106aiI79oe4</span><button class="btn-copy" data-code="EFO01O4a7106aiI79oe4">Копировать (Азия)</button></div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-19-768x432.jpeg" alt="Вторая часть"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-21-768x432.jpeg" alt="Подвод воды"></div>
+        </div>
+        <p><strong>Третья часть (юго-западный угол):</strong></p>
+        <div class="code-block"><span class="code-text">EFO014o5O8E74a309E71A</span><button class="btn-copy" data-code="EFO014o5O8E74a309E71A">Копировать (Европа)</button></div>
+        <div class="code-block"><span class="code-text">EFO01iUIauo3I62A7aU4</span><button class="btn-copy" data-code="EFO01iUIauo3I62A7aU4">Копировать (Азия)</button></div>
+        <p><strong>На аванпосте (справа от суб-ПБА):</strong></p>
+        <div class="code-block"><span class="code-text">EFO0158OE32U50uI6eIoe</span><button class="btn-copy" data-code="EFO0158OE32U50uI6eIoe">Копировать (Европа)</button></div>
+        <div class="code-block"><span class="code-text">EFO016029oU6O872O83e</span><button class="btn-copy" data-code="EFO016029oU6O872O83e">Копировать (Азия)</button></div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/skrinshot-19.03.26_07.07.27-800x450.jpg" alt="Аванпост схема"><div class="img-caption">Размещение на аванпосте</div></div></div>
+    </div>
+
+    <!-- Эндгейм-завод -->
+    <h2>🏭 Схемы производства для эндгейм-завода</h2>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-28-800x450.jpeg" alt="Эндгейм"><div class="img-caption">Максимальная выгода в облигациях</div></div></div>
+        <p>Чтобы получить максимальную выгоду в облигациях после достижения 3 уровня развития аванпоста, замените все буры в Улине на добывающие гидроустановки — это сэкономит электроэнергию. Предприятие будет производить: Инъектор ячжэня [С] — 2,8/мин, Инъектор ячжэня [A] — 6/мин, Батарея СЕ Улина — 10,5/мин. Авторство: maxxieel hater.</p>
+    </div>
+
+    <!-- Главный АПК в Улине (4 схемы) -->
+    <h2>🏗️ Главный АПК в Улине (комплекс из 4 частей)</h2>
+    <div class="card">
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-29-768x432.jpeg" alt="АПК 1"><div class="img-caption">Схема 1</div></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-30-768x432.jpeg" alt="АПК 2"><div class="img-caption">Схема 2</div></div>
+        </div>
+        <p><strong>Схема 1 (левый верхний угол):</strong></p>
+        <div class="code-block"><span class="code-text">EFO01O3E2u2UO6I3E9oe4</span><button class="btn-copy" data-code="EFO01O3E2u2UO6I3E9oe4">Копировать (Европа)</button></div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-33-800x450.jpeg" alt="Размещение растений"><div class="img-caption">Фермы: песчанолист и ячжэнь</div></div></div>
+        <p><strong>Схема 2 (справа от предыдущей):</strong></p>
+        <div class="code-block"><span class="code-text">EFO01u1Ioao5ue0a0AoOU</span><button class="btn-copy" data-code="EFO01u1Ioao5ue0a0AoOU">Копировать (Европа)</button></div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-37-768x432.jpeg" alt="Схема 2 установка"></div></div>
+        <p><strong>Схема 3 (вплотную к левой верхней):</strong></p>
+        <div class="code-block"><span class="code-text">EFO0172UAaio8o539O0Ai</span><button class="btn-copy" data-code="EFO0172UAaio8o539O0Ai">Копировать (Европа)</button></div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-39-800x450.jpeg" alt="Гидронасосы для схемы 3"></div></div>
+        <p><strong>Схема 4 (правый нижний угол):</strong></p>
+        <div class="code-block"><span class="code-text">EFO01893u5Iiei106UI73</span><button class="btn-copy" data-code="EFO01893u5Iiei106UI73">Копировать (Европа)</button></div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-42-800x450.jpeg" alt="Распределение портов"><div class="img-caption">Настройка портов ПБА</div></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601419-45-800x450.jpeg" alt="Финальная подводка"><div class="img-caption">Подключение отводов</div></div>
+        </div>
+        <div class="warning-note">💡 Финальный штрих: найдите неподключенный подвод, в который поступает отработанная вода, и протяните от него шланг к отводу у ячеек склада в центре.</div>
+    </div>
+
+    <footer>
+        <p>Все чертежи спроектированы пользователями skyJLV и maxxieel hater. Актуально для версии 1.1. Коды для импорта работают в европейском и азиатском регионах.</p>
+        <p>✦ Удачного строительства в Улине и эффективного производства! ✦</p>
+    </footer>
+</div>
+
+<script>
+    (function() {
+        const canvas = document.getElementById('particles-canvas');
+        if (!canvas) return;
+        let ctx = canvas.getContext('2d');
+        let width = window.innerWidth, height = window.innerHeight;
+        let particles = [];
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; initParticles(); }
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 90; i++) {
+                particles.push({
+                    x: Math.random() * width, y: Math.random() * height, r: Math.random() * 2.5 + 1,
+                    alpha: Math.random() * 0.4 + 0.2, vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.15 + 0.1,
+                    color: `hsl(${Math.random() > 0.7 ? 25 : 12}, 75%, 55%)`, flicker: Math.random() * Math.PI * 2, fs: 0.008 + Math.random() * 0.015
+                });
+            }
+        }
+        function draw() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            for (let p of particles) {
+                let a = p.alpha + Math.sin(p.flicker) * 0.1;
+                a = Math.min(0.55, Math.max(0.15, a));
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = a;
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = `rgba(241, 90, 36, 0.5)`;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                p.x += p.vx; p.y += p.vy;
+                p.flicker += p.fs;
+                if (p.x < -15) p.x = width + 10;
+                if (p.x > width + 15) p.x = -10;
+                if (p.y < -15) p.y = height + 10;
+                if (p.y > height + 15) p.y = -10;
+            }
+            requestAnimationFrame(draw);
+        }
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
+    })();
+    document.querySelectorAll('.btn-copy').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const code = this.getAttribute('data-code');
+            if (!code) return;
+            navigator.clipboard.writeText(code).then(() => {
+                const orig = this.innerText;
+                this.innerText = '✓ Скопировано!';
+                setTimeout(() => { this.innerText = orig; }, 1500);
+            });
+        });
+    });
+</script>
+</body>
+</html>
