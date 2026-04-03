@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Промокоды Arknights: Endfield апрель 2026 — рабочие коды и активация</title>
+    <meta name="description" content="Актуальные промокоды Arknights: Endfield на апрель 2026. Список рабочих кодов на ороберилы, кредиты, материалы. Инструкция, как активировать и получить награды.">
+    <!-- Favicon (стилизованный факел/лого) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23f15a24' d='M32,2 C32,2 22,20 22,32 C22,44 28,52 32,62 C36,52 42,44 42,32 C42,20 32,2 32,2 Z'/%3E%3Cpath fill='%23ffcf40' d='M32,12 C32,12 26,24 26,32 C26,40 30,46 32,54 C34,46 38,40 38,32 C38,24 32,12 32,12 Z'/%3E%3Ccircle cx='32' cy='28' r='4' fill='%23ffffff'/%3E%3C/svg%3E">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #e6e9f0;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* анимированный фон с частицами */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            display: block;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        :root {
+            --accent: #f15a24;
+            --accent-glow: rgba(241, 90, 36, 0.3);
+            --accent-dark: #b33f12;
+            --card-bg: #1f1f24;
+            --border-dim: #2c2c33;
+            --text-secondary: #b0b3c0;
+            --expired-badge: #6c6f7e;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            color: #f5f7fe;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.25rem 0 0.75rem 0;
+            color: var(--accent);
+        }
+
+        .subhead {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid var(--border-dim);
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(241, 90, 36, 0.15);
+        }
+
+        /* таблица промокодов */
+        .promo-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .promo-table th, .promo-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-dim);
+            vertical-align: top;
+        }
+
+        .promo-table th {
+            background: rgba(0,0,0,0.3);
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .code-badge {
+            font-family: 'JetBrains Mono', monospace;
+            background: #0e0e12;
+            padding: 0.3rem 0.8rem;
+            border-radius: 40px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            color: #ffcf70;
+            border: 1px solid rgba(241, 90, 36, 0.4);
+            display: inline-block;
+        }
+
+        .status-active {
+            color: #6fcf97;
+            background: rgba(111, 207, 151, 0.15);
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        .status-expired {
+            color: #e06c6c;
+            background: rgba(224, 108, 108, 0.15);
+            padding: 0.2rem 0.7rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        .rewards-list {
+            list-style: none;
+            font-size: 0.9rem;
+        }
+        .rewards-list li {
+            padding: 0.15rem 0;
+        }
+
+        .step-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: space-between;
+            margin: 1.5rem 0;
+        }
+        .step-card {
+            background: #131318;
+            border-radius: 20px;
+            padding: 1rem;
+            flex: 1;
+            min-width: 180px;
+            text-align: center;
+            border: 1px solid var(--border-dim);
+        }
+        .step-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .screenshot-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+        .screenshot-card {
+            background: #111116;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-dim);
+            max-width: 300px;
+            flex: 1;
+        }
+        .screenshot-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .screenshot-caption {
+            padding: 0.6rem;
+            font-size: 0.8rem;
+            text-align: center;
+            color: var(--text-secondary);
+            background: #0e0e12;
+        }
+
+        .warning-box {
+            background: rgba(224, 108, 108, 0.1);
+            border-left: 3px solid #e06c6c;
+            padding: 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+        }
+
+        .btn-copy {
+            background: none;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-left: 0.5rem;
+        }
+        .btn-copy:hover {
+            background: var(--accent);
+            color: #1a1a1a;
+        }
+
+        .seller-button {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #ffd966;
+            border: 1px solid rgba(241, 90, 36, 0.5);
+            cursor: default;
+            user-select: none;
+            white-space: nowrap;
+        }
+        .seller-button::before {
+            content: "🛒";
+            margin-right: 8px;
+        }
+
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0 1rem;
+            font-size: 0.8rem;
+            color: #5c5f72;
+            border-top: 1px solid var(--border-dim);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                padding: 1rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            .promo-table th, .promo-table td {
+                padding: 0.75rem;
+                display: block;
+                width: 100%;
+            }
+            .promo-table tr {
+                display: block;
+                margin-bottom: 1rem;
+                border-bottom: 1px solid var(--border-dim);
+            }
+            .promo-table th {
+                display: none;
+            }
+            .promo-table td {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: none;
+                flex-wrap: wrap;
+            }
+            .promo-table td:before {
+                content: attr(data-label);
+                font-weight: 600;
+                color: var(--accent);
+                width: 40%;
+            }
+            .seller-button {
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<canvas id="particles-canvas"></canvas>
+
+<div class="container">
+    <div class="header-flex">
+        <div>
+            <h1>Промокоды Arknights: Endfield<br><span style="font-size: 1rem; color: var(--text-secondary);">апрель 2026 — рабочие коды и бонусы</span></h1>
+        </div>
+        <div class="seller-button">Продавец: ShizzyBoost</div>
+    </div>
+    <div class="subhead">
+        Ввод действующих промокодов даёт ороберилы, кредиты, материалы опыта и прокачки. Актуальный список на апрель.
+    </div>
+
+    <!-- Главный баннер / вступление -->
+    <div class="card">
+        <div style="display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center;">
+            <div style="flex: 1; min-width: 200px;">
+                <img src="https://gamefans.ru/uploads/mini/poster-pc/b63/arknights-endfield-dimka.jpg" alt="Arknights Endfield постер" style="width: 100%; border-radius: 20px; border: 1px solid var(--border-dim);" loading="lazy" onerror="this.src='https://placehold.co/600x350/1f1f24/f15a24?text=Arknights+Endfield'">
+            </div>
+            <div style="flex: 2;">
+                <p>В разрушенном катастрофой мире Таллоса II протагонист представляет компанию Endfield, которая сосредоточена на противостоянии враждебным существам и развитии автоматических промышленных комплексов, извлекающих полезные для человечества ресурсы. Ввод действующих промокодов в Arknights: Endfield даёт больше стартовых ресурсов, материалов опыта и прокачки, а также ороберил — валюту для покупки разрешений на наём союзников. В руководстве найдёте все рабочие коды и инструкцию по их активации.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- РАБОЧИЕ ПРОМОКОДЫ -->
+    <h2>🎁 Рабочие промокоды Arknights: Endfield в апреле</h2>
+    <div class="card">
+        <p>В апреле можно получить награды за активацию следующих комбинаций (статус актуальности обновлён):</p>
+        <table class="promo-table">
+            <thead>
+                <tr><th>Промокод</th><th>Награды</th><th>Статус</th></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td data-label="Промокод"><span class="code-badge">ENDFIELDGIFT</span> <button class="btn-copy" data-code="ENDFIELDGIFT">Копировать</button></td>
+                    <td data-label="Награды"><ul class="rewards-list"><li>×150 ороберила</li><li>×10 000 Т-кредитов</li><li>×20 промежуточных записей боя</li><li>×20 тест-комплектов для оружия</li></ul></td>
+                    <td data-label="Статус"><span class="status-active">✔ Активен</span> (добавлен 21.01)</td>
+                </tr>
+                <tr>
+                    <td data-label="Промокод"><span class="code-badge">ENDFIELD4PC</span> <button class="btn-copy" data-code="ENDFIELD4PC">Копировать</button></td>
+                    <td data-label="Награды"><ul class="rewards-list"><li>×13 000 Т-кредитов</li><li>×2 подробных записей боя</li><li>×2 тест-набора для оружия</li></ul></td>
+                    <td data-label="Статус"><span class="status-active">✔ Активен</span> (только для ПК, добавлен 21.01)</td>
+                </tr>
+                <tr>
+                    <td data-label="Промокод"><span class="code-badge">RETURNOFALL</span> <button class="btn-copy" data-code="RETURNOFALL">Копировать</button></td>
+                    <td data-label="Награды"><ul class="rewards-list"><li>×500 ороберила</li><li>×6 000 Т-кредитов</li><li>×30 базовых записей боя</li><li>×30 тестеров оружия</li><li>×5 протопризм</li><li>×5 протодисков</li></ul></td>
+                    <td data-label="Статус"><span class="status-expired">✖ Истёк</span></td>
+                </tr>
+                <tr>
+                    <td data-label="Промокод"><span class="code-badge">ALLFIELD</span> <button class="btn-copy" data-code="ALLFIELD">Копировать</button></td>
+                    <td data-label="Награды"><ul class="rewards-list"><li>×1500 ороберила</li><li>×6 000 Т-кредитов</li><li>×30 базовых записей боя</li><li>×30 тестеров оружия</li><li>×5 протопризм</li><li>×5 протодисков</li><li>×1 Метка Упорства</li></ul></td>
+                    <td data-label="Статус"><span class="status-expired">✖ Истёк</span></td>
+                </tr>
+            </tbody>
+        </table>
+        <p style="margin-top: 0.8rem;">⚠️ Коды с пометкой «Истёк» больше не активируются, но оставлены для информации. Рекомендуем использовать <strong>ENDFIELDGIFT</strong> и <strong>ENDFIELD4PC</strong> как можно скорее.</p>
+    </div>
+
+    <!-- КУДА ВВОДИТЬ ПРОМОКОДЫ -->
+    <h2>📱 Куда вводить промокоды в Arknights: Endfield</h2>
+    <div class="card">
+        <p>Обмен купонов на награды осуществляется через внутриигровые настройки:</p>
+        <div class="step-grid">
+            <div class="step-card"><div class="step-number">1</div> Войдите на свой аккаунт и перейдите в <strong>настройки</strong>.</div>
+            <div class="step-card"><div class="step-number">2</div> Найдите раздел <strong>«Платформа и учетная запись»</strong>.</div>
+            <div class="step-card"><div class="step-number">3</div> Введите комбинацию в поле <strong>«Обменять код»</strong> и подтвердите действие.</div>
+        </div>
+        <p>Погашение стало доступно после глобального релиза <strong>22 января</strong> на всех платформах.</p>
+        
+        <div class="screenshot-grid">
+            <div class="screenshot-card">
+                <img src="https://wotpack.ru/wp-content/uploads/2026/01/dop.-v-promokody-endfield-3-730x411.jpg" alt="Настройки - Платформа и учетная запись" loading="lazy" onerror="this.src='https://placehold.co/300x170/1f1f24/f15a24?text=Настройки'">
+                <div class="screenshot-caption">Шаг 2: раздел «Платформа и учетная запись»</div>
+            </div>
+            <div class="screenshot-card">
+                <img src="https://wotpack.ru/wp-content/uploads/2026/01/dop.-v-promokody-endfield-1-730x411.jpg" alt="Поле для ввода кода" loading="lazy" onerror="this.src='https://placehold.co/300x170/1f1f24/f15a24?text=Поле+кода'">
+                <div class="screenshot-caption">Поле «Обменять код»</div>
+            </div>
+            <div class="screenshot-card">
+                <img src="https://wotpack.ru/wp-content/uploads/2026/01/dop.-v-promokody-endfield-2-730x411.jpg" alt="Подтверждение активации" loading="lazy" onerror="this.src='https://placehold.co/300x170/1f1f24/f15a24?text=Подтверждение'">
+                <div class="screenshot-caption">Подтверждение действия</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- КАК ПОЛУЧИТЬ НАГРАДЫ -->
+    <h2>📬 Как получить награды за активацию промокодов</h2>
+    <div class="card">
+        <div style="display: flex; flex-wrap: wrap; gap: 1.2rem; align-items: flex-start;">
+            <div style="flex: 1; min-width: 200px;">
+                <img src="https://static.mk.ru/upload/entities/2026/02/03/06/articles/facebookPicture/eb/a3/4a/1b/d01abad69379bd190426ee31537b9b29.jpg" alt="Почта в игре" style="width: 100%; border-radius: 20px; border: 1px solid var(--border-dim);" loading="lazy" onerror="this.src='https://placehold.co/400x250/1f1f24/f15a24?text=Почта'">
+            </div>
+            <div style="flex: 2;">
+                <p>Призы за рабочий код моментально доставят через письмо на <strong>внутриигровую почту</strong>. Забрать ресурсы таким образом можно в течение <strong>30 дней</strong> с момента поступления. Если не успеете вовремя, то вернуть подарок от разработчиков не удастся — код будет считаться использованным.</p>
+                <div class="warning-box">
+                    ⏳ Важно: письма с наградами хранятся ограниченное время. Регулярно проверяйте почту в игре.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ЧТО ДЕЛАТЬ, ЕСЛИ КОМБИНАЦИЯ НЕ РАБОТАЕТ -->
+    <h2>❓ Что делать, если комбинация не работает</h2>
+    <div class="card">
+        <p>Отказать в выдаче наград за активацию могут по нескольким причинам:</p>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li><strong>Истёк срок действия</strong> — у некоторых промиков не указывается длительность работы и их актуальность остается под вопросом.</li>
+            <li><strong>Ошибка ввода</strong> — проверьте, нет ли в начале или конце строки лишних пробелов, а также не была ли допущена опечатка.</li>
+            <li><strong>Код уже был активирован</strong> — награды за комбинацию можно получить только один раз на одном аккаунте.</li>
+            <li><strong>Достигнут лимит</strong> — это значит, что купон был ограничен по количеству использований и получить призы смогли самые быстрые пользователи.</li>
+        </ul>
+        <div style="background: #111116; border-radius: 16px; padding: 0.8rem; margin-top: 1rem;">
+            <p>💡 <strong>Совет:</strong> Всегда копируйте код в точности, без пробелов. Если код не подходит, возможно он уже неактивен — следите за обновлениями на официальных ресурсах.</p>
+        </div>
+    </div>
+
+    <!-- Дополнительный блок с напоминанием -->
+    <div class="card" style="background: linear-gradient(145deg, #17171c, #121217); text-align: center;">
+        <h3 style="margin: 0 0 0.5rem 0;">✨ Активируйте коды до конца апреля</h3>
+        <p>ENDFIELDGIFT и ENDFIELD4PC — ваша возможность получить ресурсы для прокачки оперативников и оружия. Не упустите шанс усилить отряд!</p>
+        <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1rem; flex-wrap: wrap;">
+            <span class="btn-copy" data-code="ENDFIELDGIFT" style="padding: 0.4rem 1rem; font-size: 0.9rem;">📋 Скопировать ENDFIELDGIFT</span>
+            <span class="btn-copy" data-code="ENDFIELD4PC" style="padding: 0.4rem 1rem; font-size: 0.9rem;">📋 Скопировать ENDFIELD4PC</span>
+        </div>
+    </div>
+
+    <footer>
+        <p>Arknights: Endfield — фан-сайт с актуальными промокодами. Информация обновлена апрель 2026. Следите за новыми купонами в официальных сообществах.<br>
+        ✦ Удачной игры и богатых наград ✦</p>
+    </footer>
+</div>
+
+<script>
+    // Анимированные частицы (огненные искры)
+    (function() {
+        const canvas = document.getElementById('particles-canvas');
+        if (!canvas) return;
+        let ctx = canvas.getContext('2d');
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let particles = [];
+        const PARTICLE_COUNT = 100;
+        
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 2.5 + 1,
+                    alpha: Math.random() * 0.45 + 0.2,
+                    speedX: (Math.random() - 0.5) * 0.25,
+                    speedY: (Math.random() - 0.5) * 0.15 + 0.1,
+                    color: `hsl(${Math.random() > 0.7 ? 25 : 12}, 75%, 55%)`,
+                    flicker: Math.random() * Math.PI * 2,
+                    flickerSpeed: 0.008 + Math.random() * 0.015
+                });
+            }
+        }
+        
+        function drawParticles() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            for (let p of particles) {
+                let flickAlpha = p.alpha + Math.sin(p.flicker) * 0.12;
+                flickAlpha = Math.min(0.6, Math.max(0.15, flickAlpha));
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = flickAlpha;
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = `rgba(241, 90, 36, 0.5)`;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.flicker += p.flickerSpeed;
+                
+                if (p.x < -15) p.x = width + 10;
+                if (p.x > width + 15) p.x = -10;
+                if (p.y < -15) p.y = height + 10;
+                if (p.y > height + 15) p.y = -10;
+            }
+            requestAnimationFrame(drawParticles);
+        }
+        
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+        resizeCanvas();
+        initParticles();
+        drawParticles();
+    })();
+
+    // Копирование кодов
+    document.querySelectorAll('.btn-copy').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+            const code = this.getAttribute('data-code');
+            if (!code) return;
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = this.innerText;
+                this.innerText = '✓ Скопировано!';
+                setTimeout(() => {
+                    this.innerText = originalText;
+                }, 1500);
+            }).catch(() => {
+                alert('Не удалось скопировать код вручную: ' + code);
+            });
+        });
+    });
+</script>
+</body>
+</html>
