@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Ночной факел | Arknights: Endfield — гайд по оружию</title>
+    <meta name="description" content="Полный разбор меча Ночной факел 6⭐: кому подходит, как получить из боевого пропуска, где фармить эссенции и полные характеристики для оперативников тепловой/природной стихии.">
+    <!-- Favicon: стилизованный факел -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23f15a24' d='M32,2 C32,2 22,20 22,32 C22,44 28,52 32,62 C36,52 42,44 42,32 C42,20 32,2 32,2 Z'/%3E%3Cpath fill='%23ffcf40' d='M32,12 C32,12 26,24 26,32 C26,40 30,46 32,54 C34,46 38,40 38,32 C38,24 32,12 32,12 Z'/%3E%3Ccircle cx='32' cy='28' r='4' fill='%23ffffff'/%3E%3C/svg%3E">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #e6e9f0;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Canvas для анимированного фона с частицами */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none; /* чтобы клики проходили сквозь фон */
+            display: block;
+        }
+
+        /* Контент поверх частиц */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        /* акцентный цвет — огненный оттенок (близко к тепловому урону и стилю игры) */
+        :root {
+            --accent: #f15a24;
+            --accent-glow: rgba(241, 90, 36, 0.3);
+            --accent-dark: #b33f12;
+            --card-bg: #1f1f24;
+            --border-dim: #2c2c33;
+            --text-secondary: #b0b3c0;
+        }
+
+        /* типографика */
+        h1, h2, h3 {
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            color: #f5f7fe;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.25rem 0 0.75rem 0;
+            color: var(--accent);
+        }
+
+        .subhead {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+        }
+
+        /* карточки и блоки */
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid var(--border-dim);
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(2px);
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(241, 90, 36, 0.15);
+        }
+
+        /* таблица персонажей (гибкая) */
+        .char-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .char-card {
+            background: #17171c;
+            border-radius: 20px;
+            border-left: 4px solid var(--accent);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            padding: 1.2rem 1.5rem;
+            align-items: center;
+            transition: all 0.2s;
+        }
+
+        .char-avatar {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            background: #25252e;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .char-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .char-info {
+            flex: 1;
+        }
+
+        .char-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+        }
+
+        .char-desc {
+            color: var(--text-secondary);
+            margin-top: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        .element-badge {
+            display: inline-block;
+            background: rgba(241, 90, 36, 0.2);
+            color: var(--accent);
+            border-radius: 40px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            margin-left: 0.75rem;
+            vertical-align: middle;
+        }
+
+        /* таблица статов / характеристики */
+        .stats-list {
+            background: #131318;
+            border-radius: 20px;
+            padding: 1.2rem 1.8rem;
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .stats-list li {
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed var(--border-dim);
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .stats-list li:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-weight: 500;
+            color: #cbd5e6;
+        }
+
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        /* изображения */
+        .img-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+
+        .img-card {
+            flex: 1;
+            min-width: 240px;
+            background: #111116;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-dim);
+            transition: 0.2s;
+        }
+
+        .img-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+
+        .img-caption {
+            padding: 0.75rem;
+            font-size: 0.85rem;
+            text-align: center;
+            color: var(--text-secondary);
+            background: #0e0e12;
+        }
+
+        .spec-img {
+            max-width: 100%;
+            border-radius: 20px;
+            border: 1px solid var(--border-dim);
+            margin: 1rem 0;
+        }
+
+        .badge-rarity {
+            background: linear-gradient(135deg, #ffcf40, #ffb347);
+            color: #1f1a0c;
+            padding: 0.2rem 0.8rem;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            display: inline-block;
+            margin-left: 0.5rem;
+        }
+
+        .accent-text {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: var(--border-dim);
+            margin: 1rem 0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 0 1rem;
+            font-size: 0.8rem;
+            color: #5c5f72;
+            border-top: 1px solid var(--border-dim);
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 760px) {
+            .container {
+                padding: 1rem 1.2rem;
+            }
+            h1 {
+                font-size: 1.8rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .char-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .char-avatar {
+                width: 100px;
+                height: 100px;
+            }
+            .stats-list li {
+                flex-direction: column;
+                gap: 0.2rem;
+            }
+            .seller-button {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 1rem;
+                display: inline-block;
+                text-align: center;
+                width: auto;
+            }
+            .header-flex {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+            }
+        }
+
+        .btn-style {
+            background: rgba(241, 90, 36, 0.1);
+            border-radius: 100px;
+            padding: 0.2rem 1rem;
+            font-size: 0.75rem;
+            display: inline-block;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+        }
+
+        .obtain-list {
+            background: #17171c;
+            border-radius: 18px;
+            padding: 1.2rem 1.8rem;
+            margin: 1rem 0;
+        }
+        .obtain-list li {
+            margin-left: 1.2rem;
+            padding: 0.4rem 0;
+        }
+
+        /* НЕКЛИКАБЕЛЬНАЯ КНОПКА (Продавец) */
+        .seller-button {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            color: #ffd966;
+            border: 1px solid rgba(241, 90, 36, 0.5);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            cursor: default;
+            user-select: none;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .seller-button::before {
+            content: "🛒";
+            margin-right: 8px;
+            font-size: 1rem;
+            filter: drop-shadow(0 0 2px #f15a24);
+        }
+        .seller-button:hover {
+            background: rgba(0, 0, 0, 0.8);
+            border-color: var(--accent);
+            /* без изменения курсора, кнопка некликабельна */
+        }
+
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Canvas для анимированных частиц -->
+<canvas id="particles-canvas"></canvas>
+
+<div class="container">
+    <!-- Шапка с логотипом и некликабельной кнопкой -->
+    <div class="header-flex">
+        <div>
+            <div style="margin-bottom: 0.5rem;">
+                <span class="btn-style">⭐6 Одноручный меч</span>
+            </div>
+            <h1>Ночной факел<br><span style="font-size: 1rem; color: var(--text-secondary);">Arknights: Endfield — кому подходит и как получить</span></h1>
+        </div>
+        <!-- Некликабельная кнопка "Продавец: ShizzyBoost" -->
+        <div class="seller-button">Продавец: ShizzyBoost</div>
+    </div>
+    
+    <div class="subhead">
+        Тепловой и природный урон • Элементальный бонус за счёт реакций искусств • Универсальное усиление при правильных союзниках
+    </div>
+
+    <!-- введение -->
+    <div class="card">
+        <p><strong>Ночной факел</strong> — одноручный меч 6⭐ редкости, повышающий тепловой и природный урон. Элементальный бонус даётся за вызов реакций искусств, поэтому не каждый оперативник может самостоятельно активировать пассивный эффект. Однако с правильно подобранными союзниками усиление становится доступно любому герою.</p>
+    </div>
+
+    <!-- КАК ПОЛУЧИТЬ -->
+    <h2>🔥 Как получить оружие</h2>
+    <div class="card">
+        <p>Меч находится в ящиках расширенного <strong>Протопропуска (БП)</strong>:</p>
+        <ul class="obtain-list" style="list-style: none; padding-left: 0;">
+            <li>✦ <span class="accent-text">«Поставка ориджиния»</span> — открывается за внутриигровую валюту ориджеметрий.</li>
+            <li>✦ <span class="accent-text">«Настроенный протокол»</span> — платная версия боевого пропуска.</li>
+        </ul>
+        <p><strong>Совет:</strong> Ночной факел стоит взять для усиления дамагера огненной или природной стихии. Если подобных оперативников нет, отталкивайтесь от других часто используемых персонажей: пистолеты — хорошая альтернатива сигнам Тантан и Ивонны, модуль искусств универсален для Гилберты, а второй меч пригодится юнитам, накладывающим уязвимость на врагов.</p>
+    </div>
+
+    <!-- КОМУ ПОДХОДИТ (основной блок) -->
+    <h2>⚔️ Кому подходит Ночной факел</h2>
+    <div class="card">
+        <p>Клинок предназначен для героев, которых собирают через <strong>интеллект и силу атаки</strong>. Больше выгоды от него получат оперативники теплового элемента благодаря дополнительной прибавке к стихии в базовых статах, но подойдёт и природным юнитам. Пассивка работает от возгорания или коррозии — причём эффекты может накладывать как владелец, так и союзники.</p>
+        <p style="margin-top: 12px;">⭐ <strong>Лэватейн</strong> полностью раскрывает потенциал меча. <strong>Росси</strong> тоже может использовать его как альтернативу, но с определёнными напарниками.</p>
+    </div>
+
+    <!-- карточки персонажей с аватарками -->
+    <div class="char-grid">
+        <!-- Лэватейн -->
+        <div class="char-card">
+            <div class="char-avatar">
+                <img src="https://static.wikia.nocookie.net/endfield/images/4/4a/Сплэш-арт_Лэватейн.png/revision/latest/scale-to-width-down/1000?cb=20251129050756&path-prefix=ru" alt="Лэватейн" loading="lazy" onerror="this.src='https://placehold.co/80x80/2c2c33/f15a24?text=Lev'">
+            </div>
+            <div class="char-info">
+                <div class="char-name">Лэватейн <span class="element-badge">Штурмовик: Тепло</span></div>
+                <div class="char-desc">При отсутствии синатурки считается лучшим вариантом: интеллект — главная характеристика девушки, дамаг полностью «окрашен» в огненный элемент, самостоятельно вешает возгорание боевым навыком и играет с юнитами, которые применяют нужные реакции. Меч даёт максимальный прирост теплового УРН и АТК.</div>
+            </div>
+        </div>
+        <!-- Росси -->
+        <div class="char-card">
+            <div class="char-avatar">
+                <img src="https://static.wikia.nocookie.net/endfield/images/6/65/Сплэш-арт_Росси.png/revision/latest/scale-to-width-down/1000?cb=20260301122030&path-prefix=ru" alt="Росси" loading="lazy" onerror="this.src='https://placehold.co/80x80/2c2c33/f15a24?text=Rossi'">
+            </div>
+            <div class="char-info">
+                <div class="char-name">Росси <span class="element-badge">Страж: Физ.</span></div>
+                <div class="char-desc">Несмотря на смешанный тип урона, бонусы для АТК и огненной стихии усилят супернавык, являющийся основным источником DPS. Однако для максимальной эффективности нужны союзники с возгоранием либо коррозией — например, Вулфгард и/или Арделия.</div>
+            </div>
+        </div>
+        <!-- Акэкури (обновлённая аватарка) -->
+        <div class="char-card" style="border-left-color: #b07d44;">
+            <div class="char-avatar" style="border-color: #b07d44;">
+                <img src="https://static.wikia.nocookie.net/endfield/images/5/5b/%D0%A1%D0%BF%D0%BB%D1%8D%D1%88-%D0%B0%D1%80%D1%82_%D0%90%D0%BA%D1%8D%D0%BA%D1%83%D1%80%D0%B8.png/revision/latest/scale-to-width-down/1000?cb=20251129045107&path-prefix=ru" alt="Акэкури" loading="lazy" onerror="this.src='https://placehold.co/80x80/2c2c33/f15a24?text=Akekuri'">
+            </div>
+            <div class="char-info">
+                <div class="char-name">Акэкури <span class="element-badge" style="background:#b07d4422; color:#e0a55b;">Авангард: Тепло</span></div>
+                <div class="char-desc">Хотя Акэкури накладывает поражение, вызывая возгорание в сочетании с другим искусством, для неё это не лучший вариант. Героиня сосредоточена на поддержке, к тому же огненный бонус влияет только на дамаг боевого умения. При желании и отсутствии персонажей выше, клинок можно отдать ей, поскольку от интеллекта зависит восстановление скилл-поинтов (талант «Ликование»).</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Где фармить эссенцию -->
+    <h2>⛏️ Где фармить эссенцию на меч</h2>
+    <div class="card">
+        <p>Для оружия <strong>«Ночной факел»</strong> нужна безупречная эссенция с параметрами <span class="accent-text">Интеллект, Тепловой УРН и Поражение</span>. Она фармится в <strong>«Сильном аллювии энергии»</strong> Первого месторождения и Плато энергии за 80 очков рассудка — вкладка «Индекс» руководства оперативника.</p>
+        <p>⭐ Рекомендуем заранее купить и использовать <strong>разрешение на чеканку Долины IV</strong>, чтобы получить нужные эссенции, снизив разброс статов.</p>
+        <div class="img-gallery">
+            <div class="img-card">
+                <img src="https://wotpack.ru/wp-content/uploads/2026/04/silnye-allyuvii-energii-dlya-farma-essentsii-na-mech-nochnoy-fakel-1536x834.jpg" alt="Сильный аллювий энергии — локация для фарма" loading="lazy" onerror="this.src='https://placehold.co/600x350/1f1f24/f15a24?text=Аллювий+энергии'">
+                <div class="img-caption">Первое месторождение — Аллювий энергии</div>
+            </div>
+            <div class="img-card">
+                <img src="https://wotpack.ru/wp-content/uploads/2026/04/mech-nochnoy-fakel-sredi-sovmestimogo-oruzhiya-v-allyuvii-energii-1536x833.jpg" alt="Совместимое оружие в аллювии" loading="lazy" onerror="this.src='https://placehold.co/600x350/1f1f24/f15a24?text=Оружие+в+аллювии'">
+                <div class="img-caption">Плато энергии — выбор эссенций под меч</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Характеристики + скриншот -->
+    <h2>📊 Характеристики Ночного факела</h2>
+    <div class="card">
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+            <div style="flex: 1; min-width: 200px;">
+                <img class="spec-img" src="https://wotpack.ru/wp-content/uploads/2026/04/opisanie-i-harakteristiki-mecha-nochnoy-fakel-800x435.jpg" alt="Скриншот характеристик меча Ночной факел" loading="lazy" onerror="this.src='https://placehold.co/600x350/1f1f24/f15a24?text=Ночной+факел+статы'">
+            </div>
+            <div style="flex: 1;">
+                <ul class="stats-list">
+                    <li><span class="stat-label">Тип оружия:</span><span class="stat-value">Одноручный меч</span></li>
+                    <li><span class="stat-label">Редкость:</span><span class="stat-value">⭐⭐⭐⭐⭐ (6⭐ фактическая)</span> <span class="badge-rarity">ЭПИЧЕСКАЯ</span></li>
+                    <li><span class="stat-label">Базовая атака:</span><span class="stat-value">50 → 490</span></li>
+                    <li><span class="stat-label">Пассивная характеристика:</span><span class="stat-value">Интеллект +20 → +156</span></li>
+                    <li><span class="stat-label">Специальная характеристика:</span><span class="stat-value">Тепловой УРН +5,6% → +43,3%</span></li>
+                    <li><span class="stat-label">Навык оружия:</span><span class="stat-value">+7% → +19,6% к АТК. Применение на врага возгорания или коррозии даёт +8% → +22,4% к тепловому и природному УРН на 20 сек.</span></li>
+                </ul>
+            </div>
+        </div>
+        <hr>
+        <p><strong>⚡ Пассивный эффект (Навык оружия):</strong><br>
+        Повышает силу атаки владельца. При наложении на врага статусов <span class="accent-text">«Возгорание»</span> или <span class="accent-text">«Коррозия»</span> дополнительно увеличивает тепловой и природный урон на 20 секунд. Бонус суммируется с действиями союзников, что открывает командную синергию.</p>
+    </div>
+
+    <!-- Блок с итогом и дополнительными советами -->
+    <div class="card" style="background: linear-gradient(145deg, #17171c, #121217);">
+        <h3 style="margin-top: 0;">🏆 Итог: стоит ли брать?</h3>
+        <p><strong>Ночной факел — бесплатное шестизвёздочное вооружение</strong> (из боевого пропуска) для персонажей тепловой или природной стихии. Однако оперативники должны соответствовать требованиям пассивного эффекта или играть в команде с героями, что помогают вызывать реакции, чтобы получить все усиления. Лучший выбор для <strong>Лэватейн</strong> и отличная альтернатива для Росси при условии правильного отряда. Не забывайте фармить эссенции в «Сильном аллювии энергии» с приоритетом на Интеллект и Тепловой УРН.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem;">
+            <span class="btn-style">🔥 Тепловой билд</span>
+            <span class="btn-style">🌿 Природный урон</span>
+            <span class="btn-style">⚔️ Реакции искусств</span>
+        </div>
+    </div>
+
+    <!-- маленький блок про совместимость с другими -->
+    <div style="background: #111116; border-radius: 1.5rem; padding: 1rem 1.5rem; margin-top: 0.5rem;">
+        <p style="font-size: 0.9rem; color: #a8adc2;">💡 <strong>Совет по отряду:</strong> Если у вас Росси без огненных союзников, добавьте Вулфгарда или Арделию — они легко накладывают коррозию/возгорание, раскрывая пассивку меча. Для Лэватейн меч закрывает все потребности в уроне даже без синатурного оружия.</p>
+    </div>
+
+    <footer>
+        <p>Arknights: Endfield — фан-гайд. Вся информация основана на игровых механиках. «Ночной факел» доступен в расширенном Протопропуске.<br>
+        ✦ Удачных фарма эссенций и высоких критов ✦</p>
+    </footer>
+</div>
+
+<script>
+    (function() {
+        // Анимированные частицы — эффект тлеющих угольков / магических искр
+        const canvas = document.getElementById('particles-canvas');
+        if (!canvas) return;
+        let ctx = canvas.getContext('2d');
+        let width = window.innerWidth;
+        let height = window.innerHeight;
+        let particles = [];
+        const PARTICLE_COUNT = 110;
+        
+        function resizeCanvas() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+        }
+        
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < PARTICLE_COUNT; i++) {
+                particles.push({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    radius: Math.random() * 3 + 1.2,
+                    alpha: Math.random() * 0.4 + 0.2,
+                    speedX: (Math.random() - 0.5) * 0.3,
+                    speedY: (Math.random() - 0.5) * 0.2 + 0.1, // лёгкое смещение вниз
+                    color: `hsl(${Math.random() > 0.7 ? 25 : 15}, 80%, 55%)`, // огненные оттенки
+                    flicker: Math.random() * Math.PI * 2,
+                    flickerSpeed: 0.01 + Math.random() * 0.02
+                });
+            }
+        }
+        
+        function drawParticles() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            for (let p of particles) {
+                // мерцание
+                let flickAlpha = p.alpha + Math.sin(p.flicker) * 0.12;
+                flickAlpha = Math.min(0.65, Math.max(0.15, flickAlpha));
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = flickAlpha;
+                ctx.fill();
+                // добавим слабое свечение
+                ctx.shadowBlur = 6;
+                ctx.shadowColor = `rgba(241, 90, 36, 0.6)`;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                // обновление координат
+                p.x += p.speedX;
+                p.y += p.speedY;
+                p.flicker += p.flickerSpeed;
+                
+                // возврат на экран
+                if (p.x < -10) p.x = width + 5;
+                if (p.x > width + 10) p.x = -5;
+                if (p.y < -10) p.y = height + 5;
+                if (p.y > height + 10) p.y = -10;
+            }
+            requestAnimationFrame(drawParticles);
+        }
+        
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            initParticles();
+        });
+        
+        resizeCanvas();
+        initParticles();
+        drawParticles();
+    })();
+</script>
+</body>
+</html>
