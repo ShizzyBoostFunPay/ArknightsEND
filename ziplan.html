@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Лучшие зиплайн-маршруты | Arknights: Endfield — как построить и запитать</title>
+    <meta name="description" content="Оптимальные зиплайн-маршруты в Arknights Endfield: гайд по строительству, питанию и расстановке вышек на всех картах. Экономьте время на фарме!">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23f15a24' d='M32,2 C32,2 22,20 22,32 C22,44 28,52 32,62 C36,52 42,44 42,32 C42,20 32,2 32,2 Z'/%3E%3Cpath fill='%23ffcf40' d='M32,12 C32,12 26,24 26,32 C26,40 30,46 32,54 C34,46 38,40 38,32 C38,24 32,12 32,12 Z'/%3E%3Ccircle cx='32' cy='28' r='4' fill='%23ffffff'/%3E%3C/svg%3E">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #e6e9f0;
+            line-height: 1.5;
+            position: relative;
+            min-height: 100vh;
+        }
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+        :root {
+            --accent: #f15a24;
+            --card-bg: #1f1f24;
+            --border-dim: #2c2c33;
+            --text-secondary: #b0b3c0;
+        }
+        h1 {
+            font-size: 2.4rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            color: #f5f7fe;
+        }
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.25rem 0 0.75rem 0;
+            color: var(--accent);
+        }
+        .subhead {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid var(--border-dim);
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            backdrop-filter: blur(2px);
+        }
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(241, 90, 36, 0.15);
+        }
+        .img-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+        .img-card {
+            background: #111116;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-dim);
+            max-width: 100%;
+            flex: 1;
+            min-width: 250px;
+        }
+        .img-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .img-caption {
+            padding: 0.6rem;
+            font-size: 0.8rem;
+            text-align: center;
+            color: var(--text-secondary);
+            background: #0e0e12;
+        }
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #0e0e12;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .comparison-table th, .comparison-table td {
+            padding: 0.8rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-dim);
+        }
+        .comparison-table th {
+            background: #1a1a22;
+            color: var(--accent);
+        }
+        .warning-note {
+            background: rgba(224, 108, 108, 0.1);
+            border-left: 3px solid #e06c6c;
+            padding: 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+        }
+        .info-note {
+            background: rgba(241, 90, 36, 0.1);
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+        }
+        .seller-button {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #ffd966;
+            border: 1px solid rgba(241, 90, 36, 0.5);
+            cursor: default;
+            user-select: none;
+        }
+        .seller-button::before {
+            content: "🛒";
+            margin-right: 8px;
+        }
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 0 1rem;
+            font-size: 0.8rem;
+            color: #5c5f72;
+            border-top: 1px solid var(--border-dim);
+            margin-top: 2rem;
+        }
+        @media (max-width: 760px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 1.8rem; }
+        }
+        hr { border: none; height: 1px; background: var(--border-dim); margin: 1rem 0; }
+    </style>
+</head>
+<body>
+<canvas id="particles-canvas"></canvas>
+<div class="container">
+    <div class="header-flex">
+        <div><h1>Лучшие зиплайн-маршруты<br><span style="font-size: 1rem; color: var(--text-secondary);">Arknights: Endfield — как построить и запитать</span></h1></div>
+        <div class="seller-button">Продавец: ShizzyBoost</div>
+    </div>
+    <div class="subhead">
+        Быстрое перемещение по карте с помощью зиплайнов — экономьте время на ежедневном фарме. Оптимальные маршруты для всех локаций.
+    </div>
+
+    <!-- Введение -->
+    <div class="card">
+        <p>В Arknights: Endfield при помощи зиплайнов можно быстро перемещаться по карте и достигать ключевых точек фарма, избегая долгих пеших маршрутов. Несмотря на то, что локации в игре нельзя назвать большими, телепорты расставлены не очень часто, и, полагаясь только на них, ежедневная рутина сильно растягивается. В руководстве собраны оптимальные пути через все важные места на каждой из карт.</p>
+    </div>
+
+    <!-- Как ставить зиплайны -->
+    <h2>📡 Как ставить зиплайны</h2>
+    <div class="card">
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-1-800x450.jpeg" alt="Технологии зиплайнов"><div class="img-caption">Технологии из стандартного плана АПК</div></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-2-800x450.jpeg" alt="Постройка зиплайнов"><div class="img-caption">Прокладка линий до частых точек</div></div>
+        </div>
+        <p>Для получения доступа к строительству линий быстрого перемещения требуются технологии из стандартного плана АПК:</p>
+        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+            <li><strong>Полевая переброска I</strong> — добавляет в меню строительства базовые зиплайн-пилоны.</li>
+            <li><strong>Полевая переброска II</strong> — дополняет список сооружений более продвинутыми зиплайн-вышками.</li>
+        </ul>
+        <p>В первую очередь после разблокировки технологий следует проложить линии до точек, которые чаще всего посещаете: редкие места произрастания, залежи руды, станции переработки, аллювии энергии. Также важно проложить быстрые пути от узлов склада до получателей посылок, а в Улине — ко всем местам фото для мониторинга окружающей среды.</p>
+    </div>
+
+    <!-- Отличие пилона от вышки -->
+    <h2>⚡ Отличие пилона от вышки</h2>
+    <div class="card">
+        <p>Оба сооружения позволяют перемещаться по прямой линии, однако между ними есть существенные различия:</p>
+        <table class="comparison-table">
+            <thead><tr><th>Функция</th><th>Пилон</th><th>Вышка</th></tr></thead>
+            <tbody>
+                <tr><td>Максимальная дальность соединения</td><td>80 метров</td><td>110 метров</td></tr>
+                <tr><td>Материал для крафта</td><td>Аметистовые детали</td><td>Кристоновые детали</td></tr>
+                <tr><td>Дополнительный функционал</td><td colspan="2">Узлы можно связывать в непрерывные маршруты и перемещаться по ним в автоматическом режиме. В конце каждой зип-линии нужно подтверждать намерение продолжить.</td></tr>
+            </tbody>
+        </table>
+        <p class="info-note">💡 На ранних этапах можете построить цепочку из простых аметистовых пилонов, а для поздних этапов игры лучше использовать вышки.</p>
+    </div>
+
+    <!-- Как запитывать зиплайн -->
+    <h2>🔌 Как запитывать зиплайн</h2>
+    <div class="card">
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-3-e1773861381855.jpeg" alt="Подключение в Долине IV"><div class="img-caption">Долина IV: пилон/вышка ЭП</div></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-4-e1773861414546.jpeg" alt="Улин ксиранитовые узлы"><div class="img-caption">Улин: автоматическое соединение</div></div>
+        </div>
+        <p>Воздушные маршруты подключаются к энергосети аналогично другим внешним постройкам:</p>
+        <ul style="margin-left: 1.5rem;">
+            <li>В <strong>Долине IV</strong> необходимо рядом с каждым устройством установить пилон или вышку ЭП и вручную подключить к общей энергосети.</li>
+            <li>В <strong>Улине</strong> на смену обычным устройствам для электропередачи приходят ксиранитовые. Их не нужно подключать вручную, достаточно разместить узлы ЛЭП не более чем в 80 метрах друг от друга — и они соединятся автоматически.</li>
+        </ul>
+        <div class="warning-note">⚠️ Каждая постройка расходует 5 единиц энергии из общего резерва. Большое количество внешних сооружений может привести к нехватке питания для завода.</div>
+    </div>
+
+    <!-- Лучшая расстановка зиплайн-маршрутов -->
+    <h2>🗺️ Лучшая расстановка зиплайн-маршрутов</h2>
+    <div class="card">
+        <p>Идеальная цепочка из зиплайнов должна позволять добраться до любого важного объекта на карте. Чем меньше на пути промежуточных узлов, тем менее энергозатратной она будет.</p>
+    </div>
+
+    <!-- Центр -->
+    <h3>🏢 Центр</h3>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-5-800x450.jpeg" alt="Центр маршрут"><div class="img-caption">Ограничение 20 зиплайнов, дорога через все точки интереса</div></div></div>
+        <p>Ограничение на размещение зиплайн-сооружений в локации — 20. С помощью 18 зиплайнов можно построить дорогу через все точки интереса.</p>
+    </div>
+
+    <!-- Перевал -->
+    <h3>⛰️ Перевал</h3>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-6-800x450.jpeg" alt="Перевал маршрут"><div class="img-caption">Маленькая зона с ограничением 10 сооружений</div></div></div>
+        <p>Маленькая зона с ограничением на 10 сооружений. Здесь есть три места, которые могут регулярно посещаться, но одно из них спрятано в пещере, поэтому туда придётся ходить пешком. До оставшихся двух точек можно проложить дорогу с помощью шести башен.</p>
+    </div>
+
+    <!-- Карьер Эберрей -->
+    <h3>⛏️ Карьер Эберрей</h3>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-7-800x450.jpeg" alt="Карьер Эберрей"><div class="img-caption">Неудобный рельеф, но можно уложиться в 9 сооружений</div></div></div>
+        <p>Маленькая, но из-за своего рельефа очень неудобная локация для прокладки ЛЭП и зиплайн-маршрутов. Можно уложиться в жёсткое ограничение на 10 сооружений, построив всего девять.</p>
+    </div>
+
+    <!-- Центр исследования ориджиния -->
+    <h3>🔬 Центр исследования ориджиния</h3>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-8-800x450.jpeg" alt="Центр исследования"><div class="img-caption">Важно для доставки товаров, 20 мест, схема на 17 строений</div></div></div>
+        <p>Территория отличается тем, что на ней впервые встречается механика доставки товаров, при этом на размещение зиплайн-сооружений выделяется 20 мест. Прокладка пути здесь особенно важна, чтобы быстро добраться с хрупкой посылкой до адресата. На скриншоте изображён пример схемы с использованием 17 строений.</p>
+    </div>
+
+    <!-- Первое месторождение -->
+    <h3>💎 Первое месторождение</h3>
+    <div class="card">
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-9-768x432.jpeg" alt="Первое месторождение 1"><div class="img-caption">Запутанная территория с пещерами</div></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-10-768x432.jpeg" alt="Первое месторождение 2"><div class="img-caption">Синяя линия уходит в пещеру</div></div>
+        </div>
+        <p>Наиболее запутанная территория со множеством пещер, ущелий и пропастей. Здесь стоит ограничение в 25 построек, но можно уложиться в 22. Синим на карте помечена линия, уходящая в пещеру.</p>
+    </div>
+
+    <!-- Плато Энергии -->
+    <h3>⚡ Плато Энергии</h3>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-11-800x450.jpeg" alt="Плато Энергии"><div class="img-caption">Финальная локация, 20 узлов, уложиться можно в 11</div></div></div>
+        <p>Финальная локация региона не отличается большим размером, но перемещаться по ней неудобно из-за впадины с военным лагерем Костоломов. Здесь доступно всего 20 маршрутных узлов, но уложиться можно в 11.</p>
+    </div>
+
+    <!-- Долина Цзинъю -->
+    <h3>🌿 Долина Цзинъю</h3>
+    <div class="card">
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-12-768x432.jpeg" alt="Долина Цзинъю 1"><div class="img-caption">Болотистая территория</div></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-13-768x432.jpeg" alt="Долина Цзинъю 2"><div class="img-caption">Цепочка из 16 вышек без ответвлений</div></div>
+        </div>
+        <p>Расположение точек интереса на этой болотистой территории позволяет построить путь из 16 вышек. При этом все они стоят в одной цепочке без ответвлений, что позволит в считаные минуты собрать все важные ресурсы.</p>
+    </div>
+
+    <!-- Улин -->
+    <h3>🏙️ Улин</h3>
+    <div class="card">
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-15-768x432.jpeg" alt="Улин 1"><div class="img-caption">Столица водного региона, до 50 зиплайнов</div></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-14-768x432.jpeg" alt="Улин 2"><div class="img-caption">Зацикленный путь из 36 узлов</div></div>
+        </div>
+        <p>В столице водного региона можно построить 50 зиплайнов. Сложность в том, что карта большая, а в городе выстраивать линии сложно из-за мешающих зданий. Чтобы оптимизировать маршрут, часто приходится искать подходящие позиции для установки устройств. Потратив какое-то время, можно сделать зацикленный путь из 36 узлов через все точки интереса.</p>
+    </div>
+
+    <!-- Лагерь Циньбо -->
+    <h3>🏕️ Лагерь Циньбо</h3>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601772-16-800x450.jpeg" alt="Лагерь Циньбо"><div class="img-caption">Всего три места для посещения, 9 вышек</div></div></div>
+        <p>Окрестности главного форта Циньбо содержат всего три места для регулярного посещения. Проложить к ним воздушные дороги можно с помощью девяти вышек.</p>
+    </div>
+
+    <!-- Заключение -->
+    <div class="card">
+        <p>Приведённые выше маршруты зиплайнов являются примером и повторять их необязательно. Главное — выделить для себя на карте самые часто посещаемые места и постараться проложить к ним путь, задействуя как можно меньше вышек. Потратив сейчас время на оптимизацию маршрутов, в будущем сэкономите часы на регулярном фарме.</p>
+        <div class="info-note" style="margin-top: 1rem;">✨ Совет: комбинируйте зиплайны с телепортами для максимальной эффективности. Не забывайте про энергопотребление — ставьте генераторы при необходимости.</div>
+    </div>
+
+    <footer>
+        <p>Arknights: Endfield — гайд по зиплайн-маршрутам. Оптимальные схемы для всех локаций помогут вам быстрее фармить ресурсы и выполнять задания.</p>
+        <p>✦ Лёгких вам полётов по воздушным линиям! ✦</p>
+    </footer>
+</div>
+
+<script>
+    (function() {
+        const canvas = document.getElementById('particles-canvas');
+        if (!canvas) return;
+        let ctx = canvas.getContext('2d');
+        let width = window.innerWidth, height = window.innerHeight;
+        let particles = [];
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; initParticles(); }
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * width, y: Math.random() * height, r: Math.random() * 2.5 + 1,
+                    alpha: Math.random() * 0.4 + 0.2, vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.15 + 0.1,
+                    color: `hsl(${Math.random() > 0.7 ? 25 : 12}, 75%, 55%)`, flicker: Math.random() * Math.PI * 2, fs: 0.008 + Math.random() * 0.015
+                });
+            }
+        }
+        function draw() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            for (let p of particles) {
+                let a = p.alpha + Math.sin(p.flicker) * 0.1;
+                a = Math.min(0.55, Math.max(0.15, a));
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = a;
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = `rgba(241, 90, 36, 0.5)`;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                p.x += p.vx; p.y += p.vy;
+                p.flicker += p.fs;
+                if (p.x < -15) p.x = width + 10;
+                if (p.x > width + 15) p.x = -10;
+                if (p.y < -15) p.y = height + 10;
+                if (p.y > height + 15) p.y = -10;
+            }
+            requestAnimationFrame(draw);
+        }
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
+    })();
+</script>
+</body>
+</html>
