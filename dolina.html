@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Чертежи заводов в Долине 4 | Arknights: Endfield — лучшие схемы для всех этапов</title>
+    <meta name="description" content="Готовые чертежи заводов в Долине IV: от начального производства до эндгейма. Коды для импорта (Европа/Азия), схемы skyJLV и almMINSTER145.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23f15a24' d='M32,2 C32,2 22,20 22,32 C22,44 28,52 32,62 C36,52 42,44 42,32 C42,20 32,2 32,2 Z'/%3E%3Cpath fill='%23ffcf40' d='M32,12 C32,12 26,24 26,32 C26,40 30,46 32,54 C34,46 38,40 38,32 C38,24 32,12 32,12 Z'/%3E%3Ccircle cx='32' cy='28' r='4' fill='%23ffffff'/%3E%3C/svg%3E">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #0a0a0a;
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            color: #e6e9f0;
+            line-height: 1.5;
+            position: relative;
+            min-height: 100vh;
+        }
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+        :root {
+            --accent: #f15a24;
+            --card-bg: #1f1f24;
+            --border-dim: #2c2c33;
+            --text-secondary: #b0b3c0;
+        }
+        h1 {
+            font-size: 2.4rem;
+            background: linear-gradient(135deg, #ffffff 0%, var(--accent) 80%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+        }
+        h2 {
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+            color: #f5f7fe;
+        }
+        h3 {
+            font-size: 1.3rem;
+            margin: 1.25rem 0 0.75rem 0;
+            color: var(--accent);
+        }
+        .subhead {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid var(--border-dim);
+            padding-bottom: 1rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            border: 1px solid var(--border-dim);
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            backdrop-filter: blur(2px);
+        }
+        .card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 10px 25px rgba(241, 90, 36, 0.15);
+        }
+        .img-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.5rem 0;
+            justify-content: center;
+        }
+        .img-card {
+            background: #111116;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-dim);
+            max-width: 100%;
+            flex: 1;
+            min-width: 250px;
+        }
+        .img-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .img-caption {
+            padding: 0.6rem;
+            font-size: 0.8rem;
+            text-align: center;
+            color: var(--text-secondary);
+            background: #0e0e12;
+        }
+        .code-block {
+            background: #0a0a0e;
+            border-radius: 16px;
+            padding: 0.8rem 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            border-left: 3px solid var(--accent);
+            margin: 0.8rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+        .code-text {
+            word-break: break-all;
+            color: #ffcf70;
+        }
+        .btn-copy {
+            background: none;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            border-radius: 30px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-copy:hover {
+            background: var(--accent);
+            color: #1a1a1a;
+        }
+        .region-tag {
+            display: inline-block;
+            background: rgba(241, 90, 36, 0.2);
+            border-radius: 40px;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.7rem;
+            margin-right: 0.5rem;
+        }
+        .warning-note {
+            background: rgba(224, 108, 108, 0.1);
+            border-left: 3px solid #e06c6c;
+            padding: 1rem;
+            border-radius: 16px;
+            margin: 1rem 0;
+        }
+        .seller-button {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.65);
+            backdrop-filter: blur(8px);
+            border-radius: 60px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #ffd966;
+            border: 1px solid rgba(241, 90, 36, 0.5);
+            cursor: default;
+            user-select: none;
+        }
+        .seller-button::before {
+            content: "🛒";
+            margin-right: 8px;
+        }
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        footer {
+            text-align: center;
+            padding: 2rem 0 1rem;
+            font-size: 0.8rem;
+            color: #5c5f72;
+            border-top: 1px solid var(--border-dim);
+            margin-top: 2rem;
+        }
+        hr { border: none; height: 1px; background: var(--border-dim); margin: 1rem 0; }
+        @media (max-width: 760px) {
+            .container { padding: 1rem; }
+            h1 { font-size: 1.8rem; }
+            .code-block { flex-direction: column; align-items: flex-start; }
+        }
+        .two-columns {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 0.5rem 0;
+        }
+        .two-columns > div {
+            flex: 1;
+            min-width: 200px;
+        }
+    </style>
+</head>
+<body>
+<canvas id="particles-canvas"></canvas>
+<div class="container">
+    <div class="header-flex">
+        <div><h1>Чертежи заводов в Долине 4<br><span style="font-size: 1rem; color: var(--text-secondary);">Arknights: Endfield — лучшие схемы для всех этапов</span></h1></div>
+        <div class="seller-button">Продавец: ShizzyBoost</div>
+    </div>
+    <div class="subhead">
+        Завод в Долине 4 — первые предприятия, создающие изделия из ориджиния, аметиста и феррия. Готовые чертежи для всех локаций и этапов развития от пользователя skyJLV.
+    </div>
+
+    <!-- Введение -->
+    <div class="card">
+        <p>Завод в Долине 4 — это набор первых предприятий в Arknights: Endfield, создающих изделия из ориджиния, аметиста и феррия. Взяв эти три минерала за основу, можно получить множество полезных предметов: от взрывчатки и лекарственных расходников до компонентов брони для оперативников. Все предприятия начального региона строятся по простой логике: обрабатывают и смешивают сухие вещества.</p>
+        <p style="margin-top: 0.8rem;">В гайде представлены чертежи полностью укомплектованных автономных предприятий для всех локаций и этапов развития. Схемы спроектированы пользователем <strong>skyJLV</strong>. Приступить к строительству можно после открытия первого аванпоста — лагеря беженцев на Перевале.</p>
+    </div>
+
+    <!-- Начальное производство -->
+    <h2>🔰 Начальное производство взрывчатки, батарей и гречекапсул</h2>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-1-800x450.jpeg" alt="Начальное производство"><div class="img-caption">Базовые модули для основной базы</div></div></div>
+        <p>Набор базовых модулей для основной базы после миссии «Прокладывание пути».</p>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01O3E2u4AO9Io9oe4</span><button class="btn-copy" data-code="EFO01O3E2u4AO9Io9oe4">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO018Ieo3Aeu01AUI73</span><button class="btn-copy" data-code="EFO018Ieo3Aeu01AUI73">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-2-800x450.jpeg" alt="Аванпост предприятие"><div class="img-caption">Масштабное предприятие на аванпосте</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO010U96A6u04iaE179</span><button class="btn-copy" data-code="EFO010U96A6u04iaE179">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01eAoi7uoUO4aoAi8</span><button class="btn-copy" data-code="EFO01eAoi7uoUO4aoAi8">Копировать (Азия)</button></div></div>
+        </div>
+        <p>После постройки поместите семена акетина в модуль посадки слева, а семена гречецвета — внизу.</p>
+    </div>
+
+    <!-- Переход на ферриевое производство -->
+    <h2>⚙️ Переход на ферриевое производство</h2>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-3-800x450.jpeg" alt="Ферриевое производство"><div class="img-caption">Главная база, после открытия Инфрастанции</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01Iao803EIe945o08</span><button class="btn-copy" data-code="EFO01Iao803EIe945o08">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO017i8eU1IO058O2Ai</span><button class="btn-copy" data-code="EFO017i8eU1IO058O2Ai">Копировать (Азия)</button></div></div>
+        </div>
+        <p>Ставьте на главной базе, когда откроете Инфрастанцию. Предварительно: начните добывать ферриевую руду, приобретите «Звено склада I».</p>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-4-800x450.jpeg" alt="Новый комплекс на Перевале"><div class="img-caption">Замена комплекса на Перевале (2 уровень лагеря)</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO014o5O8E74a31E71A</span><button class="btn-copy" data-code="EFO014o5O8E74a31E71A">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01a6510u2ioAeoe5e</span><button class="btn-copy" data-code="EFO01a6510u2ioAeoe5e">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-5-800x450.jpeg" alt="Ферриевые компоненты"><div class="img-caption">Инфрастанция: производство ферриевых компонентов (броня 36 уровня)</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01u1Ioa8Oui05AoOU</span><button class="btn-copy" data-code="EFO01u1Ioa8Oui05AoOU">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01u8U3IOe9203AoOU</span><button class="btn-copy" data-code="EFO01u8U3IOe9203AoOU">Копировать (Азия)</button></div></div>
+        </div>
+    </div>
+
+    <!-- Расширение аванпостов и песчанолист -->
+    <h2>🌾 Расширение аванпостов и выращивание песчанолиста</h2>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-6-800x450.jpeg" alt="Плато Энергии фермы"><div class="img-caption">Пять автоферм для песчанолиста</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01u1Ioa8Oui03iAoOU</span><button class="btn-copy" data-code="EFO01u1Ioa8Oui03iAoOU">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01A7u13IOi2EIe9ieO</span><button class="btn-copy" data-code="EFO01A7u13IOi2EIe9ieO">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-7-800x450.jpeg" alt="Центр новый завод"><div class="img-caption">Завод в Центре (расширение области II, звено склада II)</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO012I45oOe2187eIOo</span><button class="btn-copy" data-code="EFO012I45oOe2187eIOo">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO0101O35EA9ei4E179</span><button class="btn-copy" data-code="EFO0101O35EA9ei4E179">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-8-800x450.jpeg" alt="Перевал чертёж"><div class="img-caption">Третий чертёж на Перевале (гречецвет)</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO010U96A1I02iIE179</span><button class="btn-copy" data-code="EFO010U96A1I02iIE179">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01ouiOAe981638IieO</span><button class="btn-copy" data-code="EFO01ouiOAe981638IieO">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-9-800x450.jpeg" alt="Кристоновые компоненты"><div class="img-caption">Инфрастанция: кристоновые компоненты</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01O3E2u4AO9I59oe4</span><button class="btn-copy" data-code="EFO01O3E2u4AO9I59oe4">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01u8U47AaI90aaAoOU</span><button class="btn-copy" data-code="EFO01u8U47AaI90aaAoOU">Копировать (Азия)</button></div></div>
+        </div>
+    </div>
+
+    <!-- Кристоновый завод -->
+    <h2>💎 Кристоновый завод</h2>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-10-800x450.jpeg" alt="Плато Энергии электричество"><div class="img-caption">Плато Энергии: обеспечение электричеством</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01iOe7EU9i82oO72U4</span><button class="btn-copy" data-code="EFO01iOe7EU9i82oO72U4">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01ouiO3i54769I2eO</span><button class="btn-copy" data-code="EFO01ouiO3i54769I2eO">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-11-768x432.jpeg" alt="Центр часть 1"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-12-768x432.jpeg" alt="Центр часть 2"></div>
+        </div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01o0839u2o7637I2eO</span><button class="btn-copy" data-code="EFO01o0839u2o7637I2eO">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO018IeEueO5U1oUI73</span><button class="btn-copy" data-code="EFO018IeEueO5U1oUI73">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-13-768x432.jpeg" alt="Центр часть 3"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-14-768x432.jpeg" alt="Центр часть 4"></div>
+        </div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01iOe7EU9i82e97aU4</span><button class="btn-copy" data-code="EFO01iOe7EU9i82e97aU4">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01O4a72aei9IE9oe4</span><button class="btn-copy" data-code="EFO01O4a72aei9IE9oe4">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-15-768x432.jpeg" alt="Центр часть 5"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-16-768x432.jpeg" alt="Центр часть 6"></div>
+        </div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO0158OE32U50uaieIoe</span><button class="btn-copy" data-code="EFO0158OE32U50uaieIoe">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01u8U36U42U03AoOU</span><button class="btn-copy" data-code="EFO01u8U36U42U03AoOU">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-17-768x432.jpeg" alt="Центр часть 7"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-18-768x432.jpeg" alt="Центр часть 8"></div>
+        </div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO011ea07931OU2A34O7</span><button class="btn-copy" data-code="EFO011ea07931OU2A34O7">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01521eE1iA0uieIoe</span><button class="btn-copy" data-code="EFO01521eE1iA0uieIoe">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-19-800x450.jpeg" alt="Центр лекарства"><div class="img-caption">Производство топовых лекарств (северо-запад)</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01O3E2u4AO9I3u9oe4</span><button class="btn-copy" data-code="EFO01O3E2u4AO9I3u9oe4">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01a651e58o5Aeoe5e</span><button class="btn-copy" data-code="EFO01a651e58o5Aeoe5e">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-20-800x450.jpeg" alt="Инфрастанция замена"><div class="img-caption">Замена Инфрастанции</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01893u6I48U128UI73</span><button class="btn-copy" data-code="EFO01893u6I48U128UI73">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01194o2ia44Ue34O7</span><button class="btn-copy" data-code="EFO01194o2ia44Ue34O7">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="warning-note">⚠️ Перевал стройте в последнюю очередь, когда добыча руды достигнет 450/мин (ориджиний) и 810/мин (феррий). Требуются все расширения области и звенья склада.</div>
+    </div>
+
+    <!-- Эндгейм-завод Долины -->
+    <h2>🏭 Эндгейм-завод Долины</h2>
+    <div class="card">
+        <p>Перед финальным этапом: постройте добывающие установки на всех залежах, прокачайте уровень региона до 11, откройте все расширения области и склада. Добыча: ориджиний 420/мин, аметист 150/мин, феррий 1050/мин.</p>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/skrinshot-19.03.26_09.51.40-800x450.jpg" alt="Плато Энергии эндгейм"><div class="img-caption">Плато Энергии: дополнительный термический банк</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO010U96A1I02iAuE179</span><button class="btn-copy" data-code="EFO010U96A1I02iAuE179">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01I3A5U1oAA965o08</span><button class="btn-copy" data-code="EFO01I3A5U1oAA965o08">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/skrinshot-19.03.26_10.11.29-800x450.jpg" alt="Перевал эндгейм"><div class="img-caption">Перевал: первый фрагмент</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01Iao803EIe9935o08</span><button class="btn-copy" data-code="EFO01Iao803EIe9935o08">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01194o2ia44Ue34O7</span><button class="btn-copy" data-code="EFO01194o2ia44Ue34O7">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/02/chertezh-perevala-kusochek-na-poslednem-etape-prokachki-800x449.jpg" alt="Дополнение к Перевалу"><div class="img-caption">Дополнение: производство бутылок</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO012I45oOe218aIeIOo</span><button class="btn-copy" data-code="EFO012I45oOe218aIeIOo">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01ouiOAa8ii61IieO</span><button class="btn-copy" data-code="EFO01ouiOAa8ii61IieO">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-22-800x450.jpeg" alt="Инфрастанция эндгейм"><div class="img-caption">Инфрастанция: фабрика вокруг суб-ПБА</div></div></div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO014o5O8E74a3ieE71A</span><button class="btn-copy" data-code="EFO014o5O8E74a3ieE71A">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01u8U476IUU00AoOU</span><button class="btn-copy" data-code="EFO01u8U476IUU00AoOU">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-24-768x432.jpeg" alt="Главная база замена"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-25-768x432.jpeg" alt="Главная база"></div>
+        </div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01O3E2u4AO9I8A9oe4</span><button class="btn-copy" data-code="EFO01O3E2u4AO9I8A9oe4">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01eAoii708a47oAi8</span><button class="btn-copy" data-code="EFO01eAoii708a47oAi8">Копировать (Азия)</button></div></div>
+        </div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-26-768x432.jpeg" alt="Центр фермы"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-27-768x432.jpeg" alt="Центр финал"></div>
+        </div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01u1Ioa8Oui0e8AoOU</span><button class="btn-copy" data-code="EFO01u1Ioa8Oui0e8AoOU">Копировать (Европа)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO013o788u2UEaO0579</span><button class="btn-copy" data-code="EFO013o788u2UEaO0579">Копировать (Азия)</button></div></div>
+        </div>
+    </div>
+
+    <!-- Схемы для фарма облигаций -->
+    <h2>💰 Схемы производства для фарма облигаций</h2>
+    <div class="card">
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-28-800x450.jpeg" alt="Облигации завод"><div class="img-caption">Комплекс для продажи товаров на аванпосты</div></div></div>
+        <p>Для работы требуется добыча: ориджиний 560/мин, аметист 240/мин, феррий 1080/мин. Перед перестройкой накопите пару сотен батарей ВЕ. Создатель — <strong>almMINSTER145</strong>.</p>
+        
+        <h3>Для АПК в Центре</h3>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-29-768x432.jpeg" alt="Центр схема1"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-30-768x432.jpeg" alt="Центр схема2"></div>
+        </div>
+        <div class="code-block"><span class="code-text">EFO01o083372Au6E0IieO</span><button class="btn-copy" data-code="EFO01o083372Au6E0IieO">Копировать (Европа)</button></div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-31-768x432.jpeg" alt="Центр схема3"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-32-768x432.jpeg" alt="Центр схема4"></div>
+        </div>
+        <div class="code-block"><span class="code-text">EFO01u1IooiO780e6AoOU</span><button class="btn-copy" data-code="EFO01u1IooiO780e6AoOU">Копировать (Европа)</button></div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-33-768x432.jpeg" alt="Центр схема5"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-34-768x432.jpeg" alt="Центр схема6"></div>
+        </div>
+        <div class="code-block"><span class="code-text">EFO01893uuU4iI1A2UI73</span><button class="btn-copy" data-code="EFO01893uuU4iI1A2UI73">Копировать (Европа)</button></div>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-35-768x432.jpeg" alt="Центр схема7"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-36-768x432.jpeg" alt="Центр схема8"></div>
+        </div>
+        <div class="code-block"><span class="code-text">EFO0136uIIA5eoa9o0579</span><button class="btn-copy" data-code="EFO0136uIIA5eoa9o0579">Копировать (Европа)</button></div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/02/word-image-588760-10-800x450.jpeg" alt="Блок автоматизации"><div class="img-caption">Настройка портов ПБА</div></div></div>
+
+        <h3>Для всех аванпостов (кроме штаба на Плато Энергии)</h3>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-37-768x432.jpeg" alt="Аванпост часть1"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-38-768x432.jpeg" alt="Аванпост часть2"></div>
+        </div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01eE7UU36IA4aUoAi8</span><button class="btn-copy" data-code="EFO01eE7UU36IA4aUoAi8">Копировать (часть 1)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01893uuU4iI12EUI73</span><button class="btn-copy" data-code="EFO01893uuU4iI12EUI73">Копировать (часть 2)</button></div></div>
+        </div>
+
+        <h3>Для аванпоста на Плато Энергии (штаб реконструкции)</h3>
+        <div class="img-grid">
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-41-768x432.jpeg" alt="Плато часть1"></div>
+            <div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-42-768x432.jpeg" alt="Плато часть2"></div>
+        </div>
+        <div class="two-columns">
+            <div><div class="code-block"><span class="code-text">EFO01eE7UU36IA4aUoAi8</span><button class="btn-copy" data-code="EFO01eE7UU36IA4aUoAi8">Копировать (часть 1)</button></div></div>
+            <div><div class="code-block"><span class="code-text">EFO01o08393EoU66IieO</span><button class="btn-copy" data-code="EFO01o08393EoU66IieO">Копировать (часть 2)</button></div></div>
+        </div>
+        <div class="img-grid"><div class="img-card"><img src="https://wotpack.ru/wp-content/uploads/2026/03/word-image-601590-43-800x450.jpeg" alt="Отчёт АПК"><div class="img-caption">Проверка показателей в отчёте АПК</div></div></div>
+    </div>
+
+    <footer>
+        <p>Чертежи спроектированы пользователями skyJLV и almMINSTER145. Актуально для версии 1.1. Коды для импорта работают в европейском и азиатском регионах.</p>
+        <p>✦ Удачного строительства и эффективного производства в Долине 4! ✦</p>
+    </footer>
+</div>
+
+<script>
+    (function() {
+        const canvas = document.getElementById('particles-canvas');
+        if (!canvas) return;
+        let ctx = canvas.getContext('2d');
+        let width = window.innerWidth, height = window.innerHeight;
+        let particles = [];
+        function resize() { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; initParticles(); }
+        function initParticles() {
+            particles = [];
+            for (let i = 0; i < 100; i++) {
+                particles.push({
+                    x: Math.random() * width, y: Math.random() * height, r: Math.random() * 2.5 + 1,
+                    alpha: Math.random() * 0.4 + 0.2, vx: (Math.random() - 0.5) * 0.2, vy: (Math.random() - 0.5) * 0.15 + 0.1,
+                    color: `hsl(${Math.random() > 0.7 ? 25 : 12}, 75%, 55%)`, flicker: Math.random() * Math.PI * 2, fs: 0.008 + Math.random() * 0.015
+                });
+            }
+        }
+        function draw() {
+            if (!ctx) return;
+            ctx.clearRect(0, 0, width, height);
+            for (let p of particles) {
+                let a = p.alpha + Math.sin(p.flicker) * 0.1;
+                a = Math.min(0.55, Math.max(0.15, a));
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.globalAlpha = a;
+                ctx.shadowBlur = 5;
+                ctx.shadowColor = `rgba(241, 90, 36, 0.5)`;
+                ctx.fill();
+                ctx.shadowBlur = 0;
+                p.x += p.vx; p.y += p.vy;
+                p.flicker += p.fs;
+                if (p.x < -15) p.x = width + 10;
+                if (p.x > width + 15) p.x = -10;
+                if (p.y < -15) p.y = height + 10;
+                if (p.y > height + 15) p.y = -10;
+            }
+            requestAnimationFrame(draw);
+        }
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
+    })();
+    document.querySelectorAll('.btn-copy').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const code = this.getAttribute('data-code');
+            if (!code) return;
+            navigator.clipboard.writeText(code).then(() => {
+                const orig = this.innerText;
+                this.innerText = '✓ Скопировано!';
+                setTimeout(() => { this.innerText = orig; }, 1500);
+            });
+        });
+    });
+</script>
+</body>
+</html>
